@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import Form from './components/Form';
+import {useState} from "react";
+import _ from "lodash";
+
+const selectOptions = [
+    {
+        label: 'Simcha',
+        value: 1,
+    },
+    {
+        label: 'Chaim',
+        value: 2,
+    },
+    {
+        label: 'Moshe',
+        value: 3,
+    },
+    {
+        label: 'Israel',
+        value: 4,
+    },
+    {
+        label: 'Shimshon',
+        value: 5,
+    },
+];
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [data, setData] = useState({});
+
+    function handleChange(name, value){
+        _.set(data, name, value);
+        setData(_.cloneDeep(data));
+    }
+
+    return (
+        <div>
+            <div className="mx-auto max-w-2xl border rounded-lg shadow-lg mt-60 bg-white p-4">
+                <h1 className="text-2xl font-bold mb-2">Forms Elements</h1>
+                <Form.Select
+                    value="select.label"
+                    options={selectOptions}
+                    placeholder="Select a men"
+                    onChange={handleChange}
+                    label="Select input"
+                />
+            </div>
+        </div>
+    );
 }
 
 export default App;
